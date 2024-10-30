@@ -3,18 +3,22 @@ import os
 from typing import Optional
 
 class GitLabClient:
-    def __init__(self, url: str = "https://gitlab.com", token: Optional[str] = None):
+    def __init__(self, url: str = "https://gitlab.com", token: Optional[str] = None, is_oauth: bool = True):
         """Initialize GitLab client
         
         Args:
             url: GitLab instance URL
             token: Private token or OAuth token. If None, looks for GITLAB_TOKEN env variable
+            is_oauth: If True, token will be treated as OAuth token
         """
         self.token = token or os.getenv("GITLAB_OAUTH_TOKEN")
         if not self.token:
             raise ValueError("GitLab token is required. Set GITLAB_OAUTH_TOKEN env variable or pass token to constructor")
         
-        self.gl = gitlab.Gitlab(url=url, private_token=self.token)
+        if is_oauth:
+            self.gl = gitlab.Gitlab(url=url, oauth_token=self.token)
+        else:
+            self.gl = gitlab.Gitlab(url=url, private_token=self.token)
     
     def list_owned_projects(self):
         """List projects owned by the authenticated user"""
