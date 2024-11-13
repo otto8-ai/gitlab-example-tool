@@ -3,3 +3,7 @@ Description: List the user's GitLab Projects
 Credential: ./credential
 
 #!/usr/bin/env python3 ${GPTSCRIPT_TOOL_DIR}/projects.py
+
+---
+!metadata:*:category
+GitLab
