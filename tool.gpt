@@ -7,3 +7,7 @@ Credential: ./credential
 ---
 !metadata:*:category
 GitLab
+
+---
+!metadata:*:icon
+https://cdn.jsdelivr.net/npm/@phosphor-icons/core@2/assets/duotone/gitlab-logo-duotone.svg
